@@ -1,7 +1,7 @@
 ---
 title: "Welcome to Strictly Come Data!"
 date: 2018-10-14T21:49:44-04:00
-draft: true
+draft: false
 ---
 
 Welcome to Strictly Come Data! I'm analyzing the data behind the popular BBC programme *Strictly Come Dancing* in a series of posts. Some questions I'm interested in:
