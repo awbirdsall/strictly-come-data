@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Strictly Come Data</title>
+    <link>http://awbirdsall.github.io/strictly-come-data/</link>
+    <description>Recent content on Strictly Come Data</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Oct 2018 21:49:44 -0400</lastBuildDate>
+    
+	<atom:link href="http://awbirdsall.github.io/strictly-come-data/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Welcome to Strictly Come Data!</title>
+      <link>http://awbirdsall.github.io/strictly-come-data/posts/welcome/</link>
+      <pubDate>Sun, 14 Oct 2018 21:49:44 -0400</pubDate>
+      
+      <guid>http://awbirdsall.github.io/strictly-come-data/posts/welcome/</guid>
+      <description>Welcome to Strictly Come Data! I&amp;rsquo;m analyzing the data behind the popular BBC programme Strictly Come Dancing in a series of posts. Some questions I&amp;rsquo;m interested in:
+ Can I create a model to predict dancers&amp;rsquo; scores for upcoming weeks of Strictly? Can I create a model to predict who will be in the dance-off?  Stay tuned, and keeeeeep data-ing!</description>
+    </item>
+    
+  </channel>
+</rss>
