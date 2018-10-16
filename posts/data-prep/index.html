@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Strictly Come Data  | Data Preparation</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.40.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/strictly-come-data/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Data Preparation" />
+<meta property="og:description" content="The first step in my analysis is to collect Strictly data. Fortunately a lot of the hard work has been done for me by dedicated Strictly fans!
+Anyone who has spent time on Wikipedia will not be surprised to hear the encyclopedic collection of Strictly data available there. There&rsquo;s not only all of the scores for all 16 series, but also information like the highest and lowest score for each dance, for each series." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://awbirdsall.github.io/strictly-come-data/posts/data-prep/" />
+
+
+
+<meta property="article:published_time" content="2018-10-15T20:49:39-04:00"/>
+
+<meta property="article:modified_time" content="2018-10-15T20:49:39-04:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Data Preparation">
+<meta itemprop="description" content="The first step in my analysis is to collect Strictly data. Fortunately a lot of the hard work has been done for me by dedicated Strictly fans!
+Anyone who has spent time on Wikipedia will not be surprised to hear the encyclopedic collection of Strictly data available there. There&rsquo;s not only all of the scores for all 16 series, but also information like the highest and lowest score for each dance, for each series.">
+
+
+<meta itemprop="datePublished" content="2018-10-15T20:49:39-04:00" />
+<meta itemprop="dateModified" content="2018-10-15T20:49:39-04:00" />
+<meta itemprop="wordCount" content="772">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Data Preparation"/>
+<meta name="twitter:description" content="The first step in my analysis is to collect Strictly data. Fortunately a lot of the hard work has been done for me by dedicated Strictly fans!
+Anyone who has spent time on Wikipedia will not be surprised to hear the encyclopedic collection of Strictly data available there. There&rsquo;s not only all of the scores for all 16 series, but also information like the highest and lowest score for each dance, for each series."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://awbirdsall.github.io/strictly-come-data/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Strictly Come Data
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Data Preparation</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-10-15T20:49:39-04:00">October 15, 2018</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>The first step in my analysis is to collect Strictly data. Fortunately a lot of the hard work has been done for me by dedicated Strictly fans!</p>
+
+<p>Anyone who has spent time on Wikipedia will not be surprised to hear <a href="https://en.wikipedia.org/wiki/Strictly_Come_Dancing_(series_16)">the <em>encyclopedic</em> collection of Strictly data available there</a>. There&rsquo;s not only all of the scores for all 16 series, but also information like the highest and lowest score for each dance, for each series.</p>
+
+<p>But it gets even better! <a href="http://www.ultimatestrictly.com/">Ultimate Strictly</a>, which is a key source for the Wikipedia data, also maintains a detailed record of all scores and dances. And finally, there&rsquo;s a conveniently tabulated form of all the Strictly dances and scores maintained at <a href="https://four-tens.github.io/">https://four-tens.github.io/</a> (whose name I only now got&hellip;), with the source CSV files hosted on a <a href="https://github.com/four-tens/strictly-come-dancing-results">companion Github repo</a> and licensed under CC-0. There&rsquo;s also a data validation script, which is reassuring to see. According to the repo, &ldquo;This data was initially sourced and collated from Ultimate Strictly (link to their excellent source page), manually sanitised and normalised, with additional data sourced from Wikipedia.&rdquo; Sounds like a good start!</p>
+
+<p>I downloaded a copy of <code>results.csv</code> and took a look:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">url <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;https://raw.githubusercontent.com/four-tens/strictly-come-dancing-results/master/results.csv&#39;</span>
+df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(url)
+df<span style="color:#f92672">.</span>head(<span style="color:#ae81ff">1</span>)</code></pre></div>
+<p>Output:</p>
+
+<pre><code>        celebrity_id    professional_id     celebrity   professional    dance   song    series  week    running_order   score_craig     score_arlene    score_len   score_bruno     score_alesha    score_darcey    score_jennifer  score_donny     score_shirley   total
+    0   0   0   Natasha Kaplinsky   Brendan Cole    Cha-cha-cha     Chain Of Fools   1   1   1   5   7   8   7   0   0   0   0   0   27
+</code></pre>
+
+<p>There&rsquo;s the first row of data! I ended up adding the scores from the start of the current series 16 that were missing and did a few small consistency checks, mostly to make sure I didn&rsquo;t accidentally add new categories to categorical columns via typos (e.g., potentially adding a dance with &ldquo;Anton du Beak&rdquo; instead of &ldquo;Anton du Beke&rdquo;):</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df<span style="color:#f92672">.</span>celebrity<span style="color:#f92672">.</span>unique()<span style="color:#f92672">.</span>size <span style="color:#f92672">==</span> df<span style="color:#f92672">.</span>celebrity_id<span style="color:#f92672">.</span>max()<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+
+df<span style="color:#f92672">.</span>professional<span style="color:#f92672">.</span>unique()<span style="color:#f92672">.</span>size <span style="color:#f92672">==</span> df<span style="color:#f92672">.</span>professional_id<span style="color:#f92672">.</span>max()<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>
+
+df<span style="color:#f92672">.</span>dance<span style="color:#f92672">.</span>sort_values()<span style="color:#f92672">.</span>unique()</code></pre></div>
+<p>I&rsquo;m glad I did this, because I discovered one &ldquo;Argentina Tango&rdquo; that had to be corrected to &ldquo;Argentine Tango&rdquo;.</p>
+
+<p>Next, I developed the following steps to finish working up the data:</p>
+
+<p>1) First, I thought it might be helpful for a model to know when a performance was in, expressed as a fraction of an episode (<code>normed_order</code>), and similarly when a week was, as a fraction of a series (<code>normed_week</code>). Scores tend to go up over the course of a series, and it seems like the show&rsquo;s producers tend to put the big routines at the start or end of an episode. Normalization helps account for there being different numbers of routines each week, and potentially different numbers of weeks in different series.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calc_normed_order</span>(df):
+    <span style="color:#e6db74">&#39;&#39;&#39;calc normalized position in show order as Series.
+</span><span style="color:#e6db74">    &#39;&#39;&#39;</span>
+    grouped_by_episode <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>groupby([<span style="color:#e6db74">&#39;series&#39;</span>,<span style="color:#e6db74">&#39;week&#39;</span>], as_index<span style="color:#f92672">=</span>False)
+    normalize <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x : (x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> x<span style="color:#f92672">.</span>max() <span style="color:#75715e"># want steps to be, e.g., 0, 0.25, 0.5, 0.75 (no 1)</span>
+    normed_order <span style="color:#f92672">=</span> grouped_by_episode<span style="color:#f92672">.</span>running_order<span style="color:#f92672">.</span>transform(normalize)
+    <span style="color:#66d9ef">return</span> normed_order
+
+<span style="color:#66d9ef">def</span> <span style="color:#a6e22e">calc_normed_week</span>(df, total_weeks<span style="color:#f92672">=</span>None):
+    <span style="color:#e6db74">&#39;&#39;&#39;calc normalized week in series order.&#39;&#39;&#39;</span>
+    grouped_by_series <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>groupby([<span style="color:#e6db74">&#39;series&#39;</span>], as_index<span style="color:#f92672">=</span>False)
+    <span style="color:#75715e"># by default, use data to determine total number of weeks in series</span>
+    <span style="color:#66d9ef">if</span> total_weeks <span style="color:#f92672">==</span> None:
+        normalize <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x : (x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> x<span style="color:#f92672">.</span>max() <span style="color:#75715e"># want steps to be, e.g., 0, 0.25, 0.5, 0.75 (no 1)</span>
+    <span style="color:#75715e"># otherwise, use passed in value (helpful if series not complete)</span>
+    <span style="color:#66d9ef">else</span>:
+        normalize <span style="color:#f92672">=</span> <span style="color:#66d9ef">lambda</span> x : (x<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> total_weeks
+    normed_week <span style="color:#f92672">=</span> grouped_by_series<span style="color:#f92672">.</span>week<span style="color:#f92672">.</span>transform(normalize)
+    <span style="color:#66d9ef">return</span> normed_week
+
+df[<span style="color:#e6db74">&#39;normed_order&#39;</span>] <span style="color:#f92672">=</span> calc_normed_order(df)
+df[<span style="color:#e6db74">&#39;normed_week&#39;</span>] <span style="color:#f92672">=</span> calc_normed_week(df)</code></pre></div>
+<p>2) Scores from judges not present in a given episode were given as &ldquo;0&rdquo;. I replaced that with NaN.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">score_columns <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>columns[[x[:<span style="color:#ae81ff">6</span>]<span style="color:#f92672">==</span><span style="color:#e6db74">&#39;score_&#39;</span> <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>columns]]
+score_columns_dict <span style="color:#f92672">=</span> {y:<span style="color:#ae81ff">0</span> <span style="color:#66d9ef">for</span> y <span style="color:#f92672">in</span> score_columns}
+score_and_total_cols <span style="color:#f92672">=</span> score_columns<span style="color:#f92672">.</span>append(pd<span style="color:#f92672">.</span>Index([<span style="color:#e6db74">&#39;total&#39;</span>]))
+df<span style="color:#f92672">.</span>replace(score_columns_dict, np<span style="color:#f92672">.</span>nan, inplace<span style="color:#f92672">=</span>True)</code></pre></div>
+<p>3) Finally, I wanted to limit the analysis to when there were only four judges. Occasionally there have been five judges on the show, and I didn&rsquo;t want that to confound the analysis. (It also has the helpful side effect of minimizing the effect of another confound, the &ldquo;Donny 10&rdquo;!)</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">df[<span style="color:#e6db74">&#39;num_judges&#39;</span>] <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>loc[:,score_columns]<span style="color:#f92672">.</span>notna()<span style="color:#f92672">.</span>aggregate(sum,axis<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)
+df_4judges <span style="color:#f92672">=</span> df<span style="color:#f92672">.</span>query(<span style="color:#e6db74">&#39;num_judges==4&#39;</span>)</code></pre></div>
+<p>I discovered this also dropped a few rows with total score 0, because all judge scores were missing. I checked Wikipedia and saw these scores were correctly missing: they were either unscored show dances from the end of series finales, or bye weeks due to celebrity injuries.</p>
+
+<p>So with that, I&rsquo;m ready to use this data to construct a model to predict a dance&rsquo;s score!</p>
+
+<p>More on that next time. The last thing for now: a pairplot I made using seaborn as a final visual check for no anomalous score values. Unsurprisingly, you can see all judges&rsquo; scores (I didn&rsquo;t realize there have been so many!) are positively correlated.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">donny_free <span style="color:#f92672">=</span> score_and_total_cols<span style="color:#f92672">.</span>delete([<span style="color:#ae81ff">7</span>]) <span style="color:#75715e"># sorry, Donny...</span>
+sns<span style="color:#f92672">.</span>pairplot(df_4judges[donny_free], dropna<span style="color:#f92672">=</span>True, diag_kind<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;kde&#39;</span>)</code></pre></div>
+<p><img src="/strictly-come-data/images/180930-first-attempt-pairplot.png" alt="Pairplot of judges' scores" /></p>
+
+<p>And remember: Keeeeeeeeeeeeeeep data-ing!</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://awbirdsall.github.io/strictly-come-data/" >
+    &copy; 2018 Strictly Come Data
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/strictly-come-data/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

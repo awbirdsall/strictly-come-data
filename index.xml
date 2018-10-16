@@ -6,10 +6,20 @@
     <description>Recent content on Strictly Come Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Oct 2018 21:49:44 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 15 Oct 2018 20:49:39 -0400</lastBuildDate>
     
 	<atom:link href="http://awbirdsall.github.io/strictly-come-data/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Preparation</title>
+      <link>http://awbirdsall.github.io/strictly-come-data/posts/data-prep/</link>
+      <pubDate>Mon, 15 Oct 2018 20:49:39 -0400</pubDate>
+      
+      <guid>http://awbirdsall.github.io/strictly-come-data/posts/data-prep/</guid>
+      <description>The first step in my analysis is to collect Strictly data. Fortunately a lot of the hard work has been done for me by dedicated Strictly fans!
+Anyone who has spent time on Wikipedia will not be surprised to hear the encyclopedic collection of Strictly data available there. There&amp;rsquo;s not only all of the scores for all 16 series, but also information like the highest and lowest score for each dance, for each series.</description>
+    </item>
     
     <item>
       <title>Welcome to Strictly Come Data!</title>

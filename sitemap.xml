@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://awbirdsall.github.io/strictly-come-data/posts/data-prep/</loc>
+    <lastmod>2018-10-15T20:49:39-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://awbirdsall.github.io/strictly-come-data/posts/welcome/</loc>
     <lastmod>2018-10-14T21:49:44-04:00</lastmod>
   </url>
@@ -14,13 +19,13 @@
   
   <url>
     <loc>http://awbirdsall.github.io/strictly-come-data/posts/</loc>
-    <lastmod>2018-10-14T21:49:44-04:00</lastmod>
+    <lastmod>2018-10-15T20:49:39-04:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://awbirdsall.github.io/strictly-come-data/</loc>
-    <lastmod>2018-10-14T21:49:44-04:00</lastmod>
+    <lastmod>2018-10-15T20:49:39-04:00</lastmod>
     <priority>0</priority>
   </url>
   
