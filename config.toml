@@ -2,6 +2,8 @@ baseURL = "http://awbirdsall.github.io/strictly-come-data/"
 languageCode = "en-us"
 title = "Strictly Come Data"
 theme = "gohugo-theme-ananke"
+PygmentsCodeFences = true
+PygmentsStyle = "monokai"
 
 [params]
-  featured_image = "/images/gold_glitter_4.png"
+  featured_image = "/images/gold_glitter_4.jpg"
