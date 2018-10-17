@@ -1,7 +1,7 @@
 ---
 title: "Data Preparation"
 date: 2018-10-15T20:49:39-04:00
-draft: true
+draft: false
 ---
 
 The first step in my analysis is to collect Strictly data. Fortunately a lot of the hard work has been done for me by dedicated Strictly fans!
