@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Strictly Come Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 15 Oct 2018 20:49:39 -0400</lastBuildDate>
+    <lastBuildDate>Tue, 16 Oct 2018 22:52:06 -0400</lastBuildDate>
     
 	<atom:link href="http://awbirdsall.github.io/strictly-come-data/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Getting Ready to Predict Dance Scores</title>
+      <link>http://awbirdsall.github.io/strictly-come-data/posts/getting-ready-to-predict-dance-scores/</link>
+      <pubDate>Tue, 16 Oct 2018 22:52:06 -0400</pubDate>
+      
+      <guid>http://awbirdsall.github.io/strictly-come-data/posts/getting-ready-to-predict-dance-scores/</guid>
+      <description>So! After getting the data prepared in the previous post, I should be ready to use machine learning and build models? Not quite. First, I need to think a little more about the requirements of the model, how I will use the available data, and how to prepare the data for the model.
+Model requirements I want to see how well a model can predict the total score a partnership will receive for a given dance.</description>
+    </item>
     
     <item>
       <title>Data Preparation</title>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Strictly Come Data  | Getting Ready to Predict Dance Scores</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.40.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/strictly-come-data/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Getting Ready to Predict Dance Scores" />
+<meta property="og:description" content="So! After getting the data prepared in the previous post, I should be ready to use machine learning and build models? Not quite. First, I need to think a little more about the requirements of the model, how I will use the available data, and how to prepare the data for the model.
+Model requirements I want to see how well a model can predict the total score a partnership will receive for a given dance." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://awbirdsall.github.io/strictly-come-data/posts/getting-ready-to-predict-dance-scores/" />
+
+
+
+<meta property="article:published_time" content="2018-10-16T22:52:06-04:00"/>
+
+<meta property="article:modified_time" content="2018-10-16T22:52:06-04:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Getting Ready to Predict Dance Scores">
+<meta itemprop="description" content="So! After getting the data prepared in the previous post, I should be ready to use machine learning and build models? Not quite. First, I need to think a little more about the requirements of the model, how I will use the available data, and how to prepare the data for the model.
+Model requirements I want to see how well a model can predict the total score a partnership will receive for a given dance.">
+
+
+<meta itemprop="datePublished" content="2018-10-16T22:52:06-04:00" />
+<meta itemprop="dateModified" content="2018-10-16T22:52:06-04:00" />
+<meta itemprop="wordCount" content="633">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Getting Ready to Predict Dance Scores"/>
+<meta name="twitter:description" content="So! After getting the data prepared in the previous post, I should be ready to use machine learning and build models? Not quite. First, I need to think a little more about the requirements of the model, how I will use the available data, and how to prepare the data for the model.
+Model requirements I want to see how well a model can predict the total score a partnership will receive for a given dance."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://awbirdsall.github.io/strictly-come-data/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Strictly Come Data
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Getting Ready to Predict Dance Scores</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-10-16T22:52:06-04:00">October 16, 2018</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<p>So! After getting the data prepared in <a href="../data-prep">the previous post</a>, I should be ready to use machine learning and build models? Not quite. First, I need to think a little more about the requirements of the model, how I will use the available data, and how to prepare the data for the model.</p>
+
+<h2 id="model-requirements">Model requirements</h2>
+
+<p>I want to see how well a model can predict the total score a partnership will receive for a given dance. The goal is to be able to predict the scores for an upcoming show ahead of time, and see how well the model performs!</p>
+
+<p>I want to predict the total score, out of 40, rather than the individual judges&rsquo; scores, because with for the total score I have the largest training set possible: all dances from all series of Strictly. (I was surprised just how many judges there have been! But also, <a href="https://giphy.com/gifs/bbc-xUOxfljQpQdYB4r9Yc/tile">Len forever</a>.) Of course, the total score may in part depend on the identity of the four judges.</p>
+
+<p>I&rsquo;ll be using the python package <code>scikit-learn</code> (<code>sklearn</code>) to implement my models. The package conveniently has all kinds of different models available, along with plentiful libraries for pre-processing data, training models, evaluating models, and more.</p>
+
+<h2 id="model-inputs">Model inputs</h2>
+
+<p>I brainstormed factors in the data set that may be important in predicting the scores:</p>
+
+<ul>
+<li>the identity of the celebrity</li>
+<li>the identity of the professional</li>
+<li>the type of dance</li>
+<li>how far along in the series the week is, fractionally</li>
+<li>the order of the dance in the show, fractionally (see below)</li>
+<li>which series it is (this should have baked in a lot of the dependence on the judging panel, assuming it&rsquo;s typically the same judging lineup for an entire series)</li>
+</ul>
+
+<p>Of course, there are other factors that I could also imagine playing a role (e.g., celebrity demographic/biographical information), but I&rsquo;ve limited myself to the above for now. Of course, it&rsquo;s also likely that a dance&rsquo;s score isn&rsquo;t entirely deterministic, so I wouldn&rsquo;t expect any model to be accurate one hundred percent of the time.</p>
+
+<h1 id="getting-prepared-data-ready-for-modeling">Getting prepared data ready for modeling</h1>
+
+<p>For all models, I first need to define the inputs (factors used to make the predictions) and labels (what is being predicted), by choosing the appropriate columns from the <code>df_4judges</code> DataFrame constructed <a href="../data-prep">last time</a>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">all_inputs <span style="color:#f92672">=</span> df_4judges[[<span style="color:#e6db74">&#39;celebrity&#39;</span>,<span style="color:#e6db74">&#39;professional&#39;</span>,<span style="color:#e6db74">&#39;dance&#39;</span>,<span style="color:#e6db74">&#39;normed_week&#39;</span>,<span style="color:#e6db74">&#39;series&#39;</span>]]
+all_labels <span style="color:#f92672">=</span> df_4judges[<span style="color:#e6db74">&#39;total&#39;</span>]</code></pre></div>
+<p>You&rsquo;ll notice I left out the order of the dance in the show as an input. This is because I realized the order is not announced ahead of time! So, even if the dance order is a helpful predictive variable, it can&rsquo;t be used to predict scores for the upcoming week.</p>
+
+<p>I also need to split the total data set into two parts: one part that is used to train each model, and one part that is used to test the trained model. Holding back part of the data for testing is key in checking for over-fitting to the training set. This is easy to set up in <code>sklearn</code>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">(training_inputs,
+ testing_inputs,
+ training_classes,
+ testing_classes) <span style="color:#f92672">=</span> train_test_split(all_inputs, all_labels, test_size<span style="color:#f92672">=</span><span style="color:#ae81ff">0.25</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>)</code></pre></div>
+<p>And finally, I need to consider some of the inputs are numerical, whereas others should be treated categorically. Out of the box, many <code>sklearn</code> estimators don&rsquo;t support categorical inputs, but I found you can use a <a href="http://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.OneHotEncoder.html"><code>OneHotEncoder</code></a> (from <code>sklearn.preprocessing</code>) to treat these cases using <a href="https://en.wikipedia.org/wiki/One-hot">one-hot encoding</a>.</p>
+
+<p>In order to only transform certain types of inputs, I used a ColumnTransformer (from <code>sklearn.compose</code>). This will serve as a pre-processor in constructing the models.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">num_columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;normed_week&#39;</span>,<span style="color:#e6db74">&#39;series&#39;</span>]
+num_transformer <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;passthrough&#39;</span>
+
+cat_columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;celebrity&#39;</span>,<span style="color:#e6db74">&#39;professional&#39;</span>,<span style="color:#e6db74">&#39;dance&#39;</span>]
+<span style="color:#75715e"># explicitly include all categories since possibly will be only in training data and not testing</span>
+cat_categories <span style="color:#f92672">=</span> [list(all_inputs[x]<span style="color:#f92672">.</span>unique()) <span style="color:#66d9ef">for</span> x <span style="color:#f92672">in</span> all_inputs[cat_columns]]
+categorical_transformer <span style="color:#f92672">=</span> OneHotEncoder(categories<span style="color:#f92672">=</span>cat_categories)
+
+preprocessor <span style="color:#f92672">=</span> ColumnTransformer(
+    transformers<span style="color:#f92672">=</span>[
+        (<span style="color:#e6db74">&#39;num&#39;</span>, num_transformer, num_columns),
+        (<span style="color:#e6db74">&#39;cat&#39;</span>, categorical_transformer, cat_columns)])</code></pre></div>
+<p>Now I&rsquo;m ready to set up the models, which will happen next time! And remember, keeeeeeeeeeeeep data-ing!</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://awbirdsall.github.io/strictly-come-data/" >
+    &copy; 2018 Strictly Come Data
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/strictly-come-data/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
