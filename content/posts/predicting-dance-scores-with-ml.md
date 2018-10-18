@@ -88,4 +88,4 @@ And remember, [keeeeeeeeeeeeep data-ing](https://secure.i.telegraph.co.uk/multim
 
 ---
 
-*Note: thanks to Randal S. Olson for his ["An example machine learning notebook"](http://nbviewer.jupyter.org/github/rhiever/Data-Analysis-and-Machine-Learning-Projects/blob/master/example-data-science-notebook/Example%20Machine%20Learning%20Notebook.ipynb), which the above analysis is heavily indebted to.*
+*Note: thanks to Randal S. Olson for his ["An example machine learning notebook"](http://nbviewer.jupyter.org/github/rhiever/Data-Analysis-and-Machine-Learning-Projects/blob/master/example-data-science-notebook/Example%20Machine%20Learning%20Notebook.ipynb), to which the above analysis is heavily indebted.*
