@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Strictly Come Data  | Predicting Dance Scores with Machine Learning Models</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.40.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/strictly-come-data/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Predicting Dance Scores with Machine Learning Models" />
+<meta property="og:description" content="Now that in the previous post I&rsquo;ve defined the goal of our model (predict Strictly scores out of 40 for the upcoming week!) and defined teaching and testing inputs and labels from the data, it&rsquo;s time to build some models!
+Setting up models I&rsquo;ve decided to compare the performance of three different regressors. One is a random forest regressor (RandomForestRegressor from sklearn.ensemble) and two are different gradient boosting regressors (GradientBoostingRegressor from sklearn." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://awbirdsall.github.io/strictly-come-data/posts/predicting-dance-scores-with-ml/" />
+
+
+
+<meta property="article:published_time" content="2018-10-17T22:33:37-04:00"/>
+
+<meta property="article:modified_time" content="2018-10-17T22:33:37-04:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Predicting Dance Scores with Machine Learning Models">
+<meta itemprop="description" content="Now that in the previous post I&rsquo;ve defined the goal of our model (predict Strictly scores out of 40 for the upcoming week!) and defined teaching and testing inputs and labels from the data, it&rsquo;s time to build some models!
+Setting up models I&rsquo;ve decided to compare the performance of three different regressors. One is a random forest regressor (RandomForestRegressor from sklearn.ensemble) and two are different gradient boosting regressors (GradientBoostingRegressor from sklearn.">
+
+
+<meta itemprop="datePublished" content="2018-10-17T22:33:37-04:00" />
+<meta itemprop="dateModified" content="2018-10-17T22:33:37-04:00" />
+<meta itemprop="wordCount" content="607">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Predicting Dance Scores with Machine Learning Models"/>
+<meta name="twitter:description" content="Now that in the previous post I&rsquo;ve defined the goal of our model (predict Strictly scores out of 40 for the upcoming week!) and defined teaching and testing inputs and labels from the data, it&rsquo;s time to build some models!
+Setting up models I&rsquo;ve decided to compare the performance of three different regressors. One is a random forest regressor (RandomForestRegressor from sklearn.ensemble) and two are different gradient boosting regressors (GradientBoostingRegressor from sklearn."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://awbirdsall.github.io/strictly-come-data/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Strictly Come Data
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Predicting Dance Scores with Machine Learning Models</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-10-17T22:33:37-04:00">October 17, 2018</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<p>Now that in <a href="../getting-ready-to-predict-dance-scores">the previous post</a> I&rsquo;ve defined the goal of our model (predict Strictly scores out of 40 for the upcoming week!) and defined teaching and testing inputs and labels from the data, it&rsquo;s time to build some models!</p>
+
+<h2 id="setting-up-models">Setting up models</h2>
+
+<p>I&rsquo;ve decided to compare the performance of three different regressors. One is a random forest regressor (<code>RandomForestRegressor</code> from <code>sklearn.ensemble</code>) and two are different gradient boosting regressors (<code>GradientBoostingRegressor</code> from <code>sklearn.ensemble</code>, and <code>XGBRegressor</code> from <code>xgboost</code>).</p>
+
+<p>I set up all three models as Pipelines in <code>sklearn</code> with the preprocessor defined as in the previous post.</p>
+
+<p>I first tried out the models using a single set of parameters, fit them to the training set, and checked their training and test set scores. For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#75715e"># gradient boosting regressor, gbr</span>
+est <span style="color:#f92672">=</span> GradientBoostingRegressor(n_estimators<span style="color:#f92672">=</span><span style="color:#ae81ff">100</span>, learning_rate<span style="color:#f92672">=</span><span style="color:#ae81ff">0.1</span>,
+                                max_depth<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>, random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>, loss<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;ls&#39;</span>)
+
+gbr <span style="color:#f92672">=</span> Pipeline(steps<span style="color:#f92672">=</span>[(<span style="color:#e6db74">&#39;preprocessor&#39;</span>, preprocessor),
+                      (<span style="color:#e6db74">&#39;regressor&#39;</span>, est)])
+
+gbr<span style="color:#f92672">.</span>fit(training_inputs, training_classes)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;unoptimized results:&#34;</span>)
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;training set score: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> gbr<span style="color:#f92672">.</span>score(training_inputs, training_classes))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;testing set score: </span><span style="color:#e6db74">%.3f</span><span style="color:#e6db74">&#34;</span> <span style="color:#f92672">%</span> gbr<span style="color:#f92672">.</span>score(testing_inputs, testing_classes))</code></pre></div>
+<p>The other regressors are set up similarly.</p>
+
+<h2 id="parameter-optimization-via-grid-search">Parameter optimization via grid search</h2>
+
+<p>However, to try to improve the performance of all the models, I wanted to improve the parameters! In all cases, I used a grid search in which two model parameters were varied to find the best performance. The grid search was performed using the same cross-validation for all three models: a k-fold cross-validation with k=10, making sure to include shuffled sampling. (Since the data is passed in as an ordered timeseries, I particularly didn&rsquo;t want different splits to only sample particular series!) The prediction score was evaluated using r-squared coefficients of determination.</p>
+
+<p>For the gradient boosting regressor and the xgboost regressor, I allowed the number of estimators and the learning rate to vary. For the random forest regressor, I allowed the number of estimators and maximum features to vary.</p>
+
+<p>After running the grid search, each GridSearchCV instance then provides a <code>best_estimator_</code> attribute containing a refitted version of the regressor that uses the parameters that gave the best score. (Not shown here, I also followed the <a href="http://nbviewer.jupyter.org/github/rhiever/Data-Analysis-and-Machine-Learning-Projects/blob/master/example-data-science-notebook/Example%20Machine%20Learning%20Notebook.ipynb">example of Randal S. Olson in visualizing the grid search results</a> to see how sensitive the model accuracy is to the searched range of parameters. I used this to help determine at what point expanding the range of the grid search is not meaningfully helpful in improving accuracy.)</p>
+
+<p>Example grid search:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">learning_rates <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">0.01</span>, <span style="color:#ae81ff">0.1</span>, <span style="color:#ae81ff">0.5</span>])
+n_estimators <span style="color:#f92672">=</span> np<span style="color:#f92672">.</span>array([<span style="color:#ae81ff">50</span>,<span style="color:#ae81ff">100</span>,<span style="color:#ae81ff">200</span>,<span style="color:#ae81ff">500</span>,<span style="color:#ae81ff">1000</span>,<span style="color:#ae81ff">2000</span>,<span style="color:#ae81ff">5000</span>])
+
+parameter_grid <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;regressor__n_estimators&#39;</span>: n_estimators,
+                  <span style="color:#e6db74">&#39;regressor__learning_rate&#39;</span>: learning_rates,
+                  }
+
+grid_search <span style="color:#f92672">=</span> GridSearchCV(gbr,
+                           param_grid<span style="color:#f92672">=</span>parameter_grid,
+                           cv<span style="color:#f92672">=</span>cv_shared)
+
+grid_search<span style="color:#f92672">.</span>fit(all_inputs, all_labels)
+
+gradient_boosting_regressor_best <span style="color:#f92672">=</span> grid_search<span style="color:#f92672">.</span>best_estimator_
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Best score: {}&#39;</span><span style="color:#f92672">.</span>format(grid_search<span style="color:#f92672">.</span>best_score_))
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;Best parameters: {}&#39;</span><span style="color:#f92672">.</span>format(grid_search<span style="color:#f92672">.</span>best_params_))</code></pre></div>
+<h2 id="comparing-optimized-model-performance">Comparing optimized model performance</h2>
+
+<p>Finally, I can compare the performance of the three models with a box-and-whisker plot that compares the distribution of accuracy scores from the 10-fold cross-validation.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">xb_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;accuracy&#39;</span>: cross_val_score(xgbr_optimized, all_inputs, all_labels, cv<span style="color:#f92672">=</span>cv_shared),
+                       <span style="color:#e6db74">&#39;regressor&#39;</span>: [<span style="color:#e6db74">&#39;XGBoost&#39;</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>})
+dt_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;accuracy&#39;</span>: cross_val_score(gradient_boosting_regressor_best, all_inputs, all_labels, cv<span style="color:#f92672">=</span>cv_shared),
+                      <span style="color:#e6db74">&#39;regressor&#39;</span>: [<span style="color:#e6db74">&#39;Gradient Boosting&#39;</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>})
+rf_df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame({<span style="color:#e6db74">&#39;accuracy&#39;</span>: cross_val_score(rfr_best, all_inputs, all_labels, cv<span style="color:#f92672">=</span>cv_shared),
+                      <span style="color:#e6db74">&#39;regressor&#39;</span>: [<span style="color:#e6db74">&#39;Random Forest&#39;</span>] <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span>})
+all_df <span style="color:#f92672">=</span> xb_df<span style="color:#f92672">.</span>append(dt_df)<span style="color:#f92672">.</span>append(rf_df)
+
+sns<span style="color:#f92672">.</span>boxplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;regressor&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;accuracy&#39;</span>, data<span style="color:#f92672">=</span>all_df)
+sns<span style="color:#f92672">.</span>stripplot(x<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;regressor&#39;</span>, y<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;accuracy&#39;</span>, data<span style="color:#f92672">=</span>all_df, jitter<span style="color:#f92672">=</span>True, color<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;black&#39;</span>)</code></pre></div>
+
+<figure>
+    
+        <img src="/strictly-come-data/images/three-model-box-whisker-cv-comparison.png" />
+    
+    
+    <figcaption>
+        <h4>Plot: box-and-whisker plot comparing three models</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>Overall, the r-squared score range of 0.6 to 0.8 doesn&rsquo;t seem that bad! Comparing the three models, you can see different amounts of variability in accuracy across the cross-validation splits. However, taken overall, the gradient boosting regressor seems to have the highest accuracy, at least when optimizing over the grid searches that I performed.</p>
+
+<p>So, now that we have the models, it&rsquo;s time to make some predictions about scores in a new episode, and evaluate how they turned out. That will be next!</p>
+
+<p>And remember, <a href="https://secure.i.telegraph.co.uk/multimedia/archive/03098/strictly2_3098177b.jpg">keeeeeeeeeeeeep data-ing</a>!</p>
+
+<hr />
+
+<p><em>Note: thanks to Randal S. Olson for his <a href="http://nbviewer.jupyter.org/github/rhiever/Data-Analysis-and-Machine-Learning-Projects/blob/master/example-data-science-notebook/Example%20Machine%20Learning%20Notebook.ipynb">&ldquo;An example machine learning notebook&rdquo;</a>, which the above analysis is heavily indebted to.</em></p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://awbirdsall.github.io/strictly-come-data/" >
+    &copy; 2018 Strictly Come Data
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/strictly-come-data/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

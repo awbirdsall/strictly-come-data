@@ -6,10 +6,20 @@
     <description>Recent content on Strictly Come Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 16 Oct 2018 22:52:06 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 17 Oct 2018 22:33:37 -0400</lastBuildDate>
     
 	<atom:link href="http://awbirdsall.github.io/strictly-come-data/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Predicting Dance Scores with Machine Learning Models</title>
+      <link>http://awbirdsall.github.io/strictly-come-data/posts/predicting-dance-scores-with-ml/</link>
+      <pubDate>Wed, 17 Oct 2018 22:33:37 -0400</pubDate>
+      
+      <guid>http://awbirdsall.github.io/strictly-come-data/posts/predicting-dance-scores-with-ml/</guid>
+      <description>Now that in the previous post I&amp;rsquo;ve defined the goal of our model (predict Strictly scores out of 40 for the upcoming week!) and defined teaching and testing inputs and labels from the data, it&amp;rsquo;s time to build some models!
+Setting up models I&amp;rsquo;ve decided to compare the performance of three different regressors. One is a random forest regressor (RandomForestRegressor from sklearn.ensemble) and two are different gradient boosting regressors (GradientBoostingRegressor from sklearn.</description>
+    </item>
     
     <item>
       <title>Getting Ready to Predict Dance Scores</title>
