@@ -1,5 +1,5 @@
 ---
-title: "Predicting Dance Scores with Machine Learning Models"
+title: "Building Models to Predict Strictly Dance Scores"
 date: 2018-10-17T22:33:37-04:00
 draft: false
 ---

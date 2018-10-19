@@ -1,5 +1,5 @@
 ---
-title: "Getting Ready to Predict Dance Scores"
+title: "Getting Ready to Build Dance-Score Predicting Models"
 date: 2018-10-16T22:52:06-04:00
 draft: false
 ---
