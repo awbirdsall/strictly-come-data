@@ -6,13 +6,23 @@
     <description>Recent content in Posts on Strictly Come Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 17 Oct 2018 22:33:37 -0400</lastBuildDate>
+    <lastBuildDate>Thu, 18 Oct 2018 21:48:30 -0400</lastBuildDate>
     
 	<atom:link href="http://awbirdsall.github.io/strictly-come-data/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Predicting Dance Scores with Machine Learning Models</title>
+      <title>Dance Score Predictions</title>
+      <link>http://awbirdsall.github.io/strictly-come-data/posts/score-prediction-and-evaluation/</link>
+      <pubDate>Thu, 18 Oct 2018 21:48:30 -0400</pubDate>
+      
+      <guid>http://awbirdsall.github.io/strictly-come-data/posts/score-prediction-and-evaluation/</guid>
+      <description>It&amp;rsquo;s time to predict some scores!
+Last time, I walked through how I trained three optimized machine learning models to predict Strictly Come Dancing scores, using all available data through Week 3 of the current series, Series 16. All three models performed decently, but the gradient boosting regressor tended to achieve the best accuracy scores in the cross-validation. So, I used that model as the &amp;ldquo;official&amp;rdquo; prediction of the week&amp;rsquo;s scores, though I was interested to see how the other models&amp;rsquo; predictions compared.</description>
+    </item>
+    
+    <item>
+      <title>Building Models to Predict Strictly Dance Scores</title>
       <link>http://awbirdsall.github.io/strictly-come-data/posts/predicting-dance-scores-with-ml/</link>
       <pubDate>Wed, 17 Oct 2018 22:33:37 -0400</pubDate>
       
@@ -22,7 +32,7 @@ Setting up models I&amp;rsquo;ve decided to compare the performance of three dif
     </item>
     
     <item>
-      <title>Getting Ready to Predict Dance Scores</title>
+      <title>Getting Ready to Build Dance-Score Predicting Models</title>
       <link>http://awbirdsall.github.io/strictly-come-data/posts/getting-ready-to-predict-dance-scores/</link>
       <pubDate>Tue, 16 Oct 2018 22:52:06 -0400</pubDate>
       

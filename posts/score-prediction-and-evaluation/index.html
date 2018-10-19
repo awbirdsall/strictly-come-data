@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Strictly Come Data  | Dance Score Predictions</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.40.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/strictly-come-data/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Dance Score Predictions" />
+<meta property="og:description" content="It&rsquo;s time to predict some scores!
+Last time, I walked through how I trained three optimized machine learning models to predict Strictly Come Dancing scores, using all available data through Week 3 of the current series, Series 16. All three models performed decently, but the gradient boosting regressor tended to achieve the best accuracy scores in the cross-validation. So, I used that model as the &ldquo;official&rdquo; prediction of the week&rsquo;s scores, though I was interested to see how the other models&rsquo; predictions compared." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://awbirdsall.github.io/strictly-come-data/posts/score-prediction-and-evaluation/" />
+
+
+
+<meta property="article:published_time" content="2018-10-18T21:48:30-04:00"/>
+
+<meta property="article:modified_time" content="2018-10-18T21:48:30-04:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Dance Score Predictions">
+<meta itemprop="description" content="It&rsquo;s time to predict some scores!
+Last time, I walked through how I trained three optimized machine learning models to predict Strictly Come Dancing scores, using all available data through Week 3 of the current series, Series 16. All three models performed decently, but the gradient boosting regressor tended to achieve the best accuracy scores in the cross-validation. So, I used that model as the &ldquo;official&rdquo; prediction of the week&rsquo;s scores, though I was interested to see how the other models&rsquo; predictions compared.">
+
+
+<meta itemprop="datePublished" content="2018-10-18T21:48:30-04:00" />
+<meta itemprop="dateModified" content="2018-10-18T21:48:30-04:00" />
+<meta itemprop="wordCount" content="693">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Dance Score Predictions"/>
+<meta name="twitter:description" content="It&rsquo;s time to predict some scores!
+Last time, I walked through how I trained three optimized machine learning models to predict Strictly Come Dancing scores, using all available data through Week 3 of the current series, Series 16. All three models performed decently, but the gradient boosting regressor tended to achieve the best accuracy scores in the cross-validation. So, I used that model as the &ldquo;official&rdquo; prediction of the week&rsquo;s scores, though I was interested to see how the other models&rsquo; predictions compared."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://awbirdsall.github.io/strictly-come-data/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Strictly Come Data
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Dance Score Predictions</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-10-18T21:48:30-04:00">October 18, 2018</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>It&rsquo;s time to predict some scores!</em></p>
+
+<p><img src="/strictly-come-data/images/strictly-perfect-score.gif" alt="Oti and Danny scoring a 40" /></p>
+
+<p><a href="../predicting-dance-scores-with-ml">Last time</a>, I walked through how I trained three optimized machine learning models to predict Strictly Come Dancing scores, using all available data through Week 3 of the current series, Series 16. All three models performed decently, but the gradient boosting regressor tended to achieve the best accuracy scores in the cross-validation. So, I used that model as the &ldquo;official&rdquo; prediction of the week&rsquo;s scores, though I was interested to see how the other models&rsquo; predictions compared.</p>
+
+<p>With the trained models in hand, all that&rsquo;s necessary is to feed them the inputs for week 4, and ask them to predict the total score out of 40. I assembled the prediction inputs using the information available on <a href="http://www.ultimatestrictly.com/series-16-week-4/">Ultimate Strictly</a>. For example, Kate and Aljaž were scheduled to dance a Samba (to <a href="https://www.mcsweeneys.net/articles/totos-africa-by-ernest-hemingway">Toto&rsquo;s</a> <a href="https://www.newyorker.com/culture/rabbit-holes/the-overwhelming-emotion-of-hearing-totos-africa-remixed-to-sound-like-its-playing-in-an-empty-mall">&ldquo;Africa&rdquo;</a>, though the model doesn&rsquo;t know what to do with that information—<a href="https://www.youtube.com/watch?v=MKpjThxxHOI">poor model!</a>). I also added the information that all of the dances will take place during Series 16 and take place 0.23 of the way through the series. I imported the inputs into a Python session as a DataFrame called <code>predict_inputs</code>, et voilà!—</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">predict_inputs[<span style="color:#e6db74">&#39;gbr&#39;</span>] <span style="color:#f92672">=</span> gbr<span style="color:#f92672">.</span>predict(predict_inputs)<span style="color:#f92672">.</span>round()
+predict_inputs[<span style="color:#e6db74">&#39;xgbr&#39;</span>] <span style="color:#f92672">=</span> xgbr<span style="color:#f92672">.</span>predict(predict_inputs)<span style="color:#f92672">.</span>round()
+predict_inputs[<span style="color:#e6db74">&#39;rfr&#39;</span>] <span style="color:#f92672">=</span> rfr<span style="color:#f92672">.</span>predict(predict_inputs)<span style="color:#f92672">.</span>round()</code></pre></div>
+<p>where <code>gbr</code>, <code>xgbr</code>, and <code>rfr</code> denote the gradient boosting, XGBoost, and random forest regressors, respectively. I rounded the predictions to the nearest integer since judges can&rsquo;t award fractional scores.</p>
+
+<p>The predictions were as follows:</p>
+
+<table>
+<thead>
+<tr>
+<th>celebrity</th>
+<th>professional</th>
+<th>dance</th>
+<th>gbr</th>
+<th>xgbr</th>
+<th>rfr</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ashley Roberts</td>
+<td>Pasha Kovalev</td>
+<td>Tango</td>
+<td>32</td>
+<td>33</td>
+<td>28</td>
+</tr>
+
+<tr>
+<td>Charles Venn</td>
+<td>Karen Clifton</td>
+<td>Salsa</td>
+<td>24</td>
+<td>24</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>Danny John-Jules</td>
+<td>Amy Dowden</td>
+<td>Viennese Waltz</td>
+<td>29</td>
+<td>30</td>
+<td>27</td>
+</tr>
+
+<tr>
+<td>Faye Tozer</td>
+<td>Giovanni Pernice</td>
+<td>Rumba</td>
+<td>30</td>
+<td>28</td>
+<td>29</td>
+</tr>
+
+<tr>
+<td>Graeme Swann</td>
+<td>Oti Mabuse</td>
+<td>Jive</td>
+<td>22</td>
+<td>25</td>
+<td>23</td>
+</tr>
+
+<tr>
+<td>Joe Sugg</td>
+<td>Dianne Buswell</td>
+<td>Cha-cha-cha</td>
+<td>26</td>
+<td>28</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>Kate Silverton</td>
+<td>Aljaž Skorjanec</td>
+<td>Samba</td>
+<td>25</td>
+<td>26</td>
+<td>26</td>
+</tr>
+
+<tr>
+<td>Katie Piper</td>
+<td>Gorka Márquez</td>
+<td>Jive</td>
+<td>17</td>
+<td>17</td>
+<td>20</td>
+</tr>
+
+<tr>
+<td>Lauren Steadman</td>
+<td>AJ Pritchard</td>
+<td>Quickstep</td>
+<td>23</td>
+<td>24</td>
+<td>26</td>
+</tr>
+
+<tr>
+<td>Dr. Ranj Singh</td>
+<td>Janette Manrara</td>
+<td>Paso Doble</td>
+<td>24</td>
+<td>26</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>Seann Walsh</td>
+<td>Katya Jones</td>
+<td>Charleston</td>
+<td>23</td>
+<td>23</td>
+<td>23</td>
+</tr>
+
+<tr>
+<td>Stacey Dooley</td>
+<td>Kevin Clifton</td>
+<td>Foxtrot</td>
+<td>27</td>
+<td>27</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>Vick Hope</td>
+<td>Graziano Di Prima</td>
+<td>Quickstep</td>
+<td>25</td>
+<td>26</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+
+<p>None of the predictions seemed absolutely bonkers, which was great! The random forest predictions did seem all be smushed together in the middling 20s, which seemed less plausible based on experience—I would agree with the other two models to expect a few totals in the thirties for standout dances. A quick seaborn <code>distplot</code> makes the difference in distributions clear:</p>
+
+
+<figure>
+    
+        <img src="/strictly-come-data/images/week-4-model-predictions-dist.png" />
+    
+    
+    <figcaption>
+        <h4>Plot: histogram comparing predicted model score distributions for Week 4</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>I was then lucky enough to have the assistance of the biggest fan of Strictly in the U.S., who was willing to contribute fan-predicted scores for the upcoming show (without having seen the model predictions). A comparison of the gradient boosting model and the fan predictions:</p>
+
+<table>
+<thead>
+<tr>
+<th>celebrity</th>
+<th>professional</th>
+<th>dance</th>
+<th>fan</th>
+<th>gbr</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ashley Roberts</td>
+<td>Pasha Kovalev</td>
+<td>Tango</td>
+<td>36</td>
+<td>32</td>
+</tr>
+
+<tr>
+<td>Charles Venn</td>
+<td>Karen Clifton</td>
+<td>Salsa</td>
+<td>25</td>
+<td>24</td>
+</tr>
+
+<tr>
+<td>Danny John-Jules</td>
+<td>Amy Dowden</td>
+<td>Viennese Waltz</td>
+<td>29</td>
+<td>29</td>
+</tr>
+
+<tr>
+<td>Faye Tozer</td>
+<td>Giovanni Pernice</td>
+<td>Rumba</td>
+<td>36</td>
+<td>30</td>
+</tr>
+
+<tr>
+<td>Graeme Swann</td>
+<td>Oti Mabuse</td>
+<td>Jive</td>
+<td>30</td>
+<td>22</td>
+</tr>
+
+<tr>
+<td>Joe Sugg</td>
+<td>Dianne Buswell</td>
+<td>Cha-cha-cha</td>
+<td>28</td>
+<td>26</td>
+</tr>
+
+<tr>
+<td>Kate Silverton</td>
+<td>Aljaž Skorjanec</td>
+<td>Samba</td>
+<td>28</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>Katie Piper</td>
+<td>Gorka Márquez</td>
+<td>Jive</td>
+<td>21</td>
+<td>17</td>
+</tr>
+
+<tr>
+<td>Lauren Steadman</td>
+<td>AJ Pritchard</td>
+<td>Quickstep</td>
+<td>25</td>
+<td>23</td>
+</tr>
+
+<tr>
+<td>Dr. Ranj Singh</td>
+<td>Janette Manrara</td>
+<td>Paso Doble</td>
+<td>25</td>
+<td>24</td>
+</tr>
+
+<tr>
+<td>Seann Walsh</td>
+<td>Katya Jones</td>
+<td>Charleston</td>
+<td>30</td>
+<td>23</td>
+</tr>
+
+<tr>
+<td>Stacey Dooley</td>
+<td>Kevin Clifton</td>
+<td>Foxtrot</td>
+<td>30</td>
+<td>27</td>
+</tr>
+
+<tr>
+<td>Vick Hope</td>
+<td>Graziano Di Prima</td>
+<td>Quickstep</td>
+<td>28</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+
+<p>Taken as a whole, the fan predictions seemed to tend a little higher. The largest discrepancy was for Seann and Katya&rsquo;s Charleston, with a seven-point spread between the two predictions. Could it be the model was overweighting the celebrity results from the early weeks of the series, when scores can be very low, and not sufficiently accounting for week-to-week improvement?  Despite this, the fan and model agreed that Danny and Amy&rsquo;s Viennese waltz was likely to score a 29, and that Katie and Gorka were at high risk of finding themselves at the bottom of the leader board.</p>
+
+<p>All left to do was wait until last Saturday, when the scores were in. When the judges revealed their scores, how would the results compare?</p>
+
+<p>Find out next time, and keeeeeeeeeeeeeeeeeeeeep data-ing!</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://awbirdsall.github.io/strictly-come-data/" >
+    &copy; 2018 Strictly Come Data
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/strictly-come-data/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
