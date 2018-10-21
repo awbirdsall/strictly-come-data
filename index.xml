@@ -6,10 +6,20 @@
     <description>Recent content on Strictly Come Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 19 Oct 2018 20:20:27 -0400</lastBuildDate>
+    <lastBuildDate>Sat, 20 Oct 2018 19:30:36 -0400</lastBuildDate>
     
 	<atom:link href="http://awbirdsall.github.io/strictly-come-data/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Week 5 Scores: A Tough Week to Predict</title>
+      <link>http://awbirdsall.github.io/strictly-come-data/posts/week-5-scores/</link>
+      <pubDate>Sat, 20 Oct 2018 19:30:36 -0400</pubDate>
+      
+      <guid>http://awbirdsall.github.io/strictly-come-data/posts/week-5-scores/</guid>
+      <description>Lots of surprises during Week 5 of Strictly Series 16!
+  Not from this week, but still a surprise.   To predict Week 5 Strictly results, I retrained the same three models as I used previously for Week 4, adding in the Week 4 results as additional model inputs. Since this represents a 33% increase in available data about the performance of this series&amp;rsquo; celebrities, I was hopeful the model predictions would improve.</description>
+    </item>
     
     <item>
       <title>Week 4 Score Evaluation</title>

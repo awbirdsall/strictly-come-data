@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Strictly Come Data  | Week 5 Scores: A Tough Week to Predict</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.40.1" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/strictly-come-data/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Week 5 Scores: A Tough Week to Predict" />
+<meta property="og:description" content="Lots of surprises during Week 5 of Strictly Series 16!
+  Not from this week, but still a surprise.   To predict Week 5 Strictly results, I retrained the same three models as I used previously for Week 4, adding in the Week 4 results as additional model inputs. Since this represents a 33% increase in available data about the performance of this series&rsquo; celebrities, I was hopeful the model predictions would improve." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://awbirdsall.github.io/strictly-come-data/posts/week-5-scores/" />
+
+
+
+<meta property="article:published_time" content="2018-10-20T19:30:36-04:00"/>
+
+<meta property="article:modified_time" content="2018-10-20T19:30:36-04:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Week 5 Scores: A Tough Week to Predict">
+<meta itemprop="description" content="Lots of surprises during Week 5 of Strictly Series 16!
+  Not from this week, but still a surprise.   To predict Week 5 Strictly results, I retrained the same three models as I used previously for Week 4, adding in the Week 4 results as additional model inputs. Since this represents a 33% increase in available data about the performance of this series&rsquo; celebrities, I was hopeful the model predictions would improve.">
+
+
+<meta itemprop="datePublished" content="2018-10-20T19:30:36-04:00" />
+<meta itemprop="dateModified" content="2018-10-20T19:30:36-04:00" />
+<meta itemprop="wordCount" content="937">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Week 5 Scores: A Tough Week to Predict"/>
+<meta name="twitter:description" content="Lots of surprises during Week 5 of Strictly Series 16!
+  Not from this week, but still a surprise.   To predict Week 5 Strictly results, I retrained the same three models as I used previously for Week 4, adding in the Week 4 results as additional model inputs. Since this represents a 33% increase in available data about the performance of this series&rsquo; celebrities, I was hopeful the model predictions would improve."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://awbirdsall.github.io/strictly-come-data/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Strictly Come Data
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Week 5 Scores: A Tough Week to Predict</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-10-20T19:30:36-04:00">October 20, 2018</time>
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p><em>Lots of surprises during Week 5 of Strictly Series 16!</em></p>
+
+
+<figure>
+    
+        <img src="/strictly-come-data/images/pasha-shopping.gif" />
+    
+    
+    <figcaption>
+        <h4>Not from this week, but still a surprise.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>To predict Week 5 Strictly results, I retrained <a href="../predicting-dance-scores-with-ml/">the same three models as I used previously for Week 4</a>, adding in the Week 4 results as additional model inputs. Since this represents a 33% increase in available data about the performance of this series&rsquo; celebrities, I was hopeful the model predictions would improve. However, the week also included two factors that threatened to befuddle the models:</p>
+
+<ul>
+<li>Bruno was off for the week, and would be replaced by former <em>Dancing with the Stars</em> champion and <em>Fresh Prince of Bel-Air</em> actor Alfonso Ribeiro (—and now I also see on <a href="https://en.wikipedia.org/wiki/Alfonso_Ribeiro">his Wikipedia page</a> current host of <em>America&rsquo;s Funniest Home Videos</em>, which apparently has decided to thumb its nose at the internet and trudge on).</li>
+<li>The new &ldquo;couple&rsquo;s choice&rdquo; category had its debut, with two routines in styles never before performed on the show (contemporary and &ldquo;street/commercial&rdquo;).</li>
+</ul>
+
+<p>Despite these warning signs, I still went ahead and predicted a score for each routine. Because it did the best last week, I decided to use the XGBoost regressor predictions as the &ldquo;official&rdquo; submission, though cross-validation performance of the plain gradient boosting model appeared on average slightly better than XGBoost, the same as last time.</p>
+
+<p>Additionally, an expert Strictly fan again was willing to share their predicted scores as a point of comparison, for which I am thankful!</p>
+
+
+<figure>
+    
+        <img src="/strictly-come-data/images/aljaz-kiss.gif" />
+    
+    
+    <figcaption>
+        <h4>Aljaz: also thankful.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>I&rsquo;ve tabulated the predictions and actual scores for Week 5:</p>
+
+<table>
+<thead>
+<tr>
+<th>partners</th>
+<th>dance</th>
+<th>fan</th>
+<th>gbr</th>
+<th>xgbr</th>
+<th>rfr</th>
+<th>actual</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Ashley and Pasha</td>
+<td>Rumba</td>
+<td>31</td>
+<td>30</td>
+<td>32</td>
+<td>26</td>
+<td>36</td>
+</tr>
+
+<tr>
+<td>Charles and Karen</td>
+<td>Street/Commercial</td>
+<td>28</td>
+<td>25</td>
+<td>23</td>
+<td>25</td>
+<td>36</td>
+</tr>
+
+<tr>
+<td>Danny and Amy</td>
+<td>Jive</td>
+<td>26</td>
+<td>26</td>
+<td>29</td>
+<td>25</td>
+<td>37</td>
+</tr>
+
+<tr>
+<td>Faye and Giovanni</td>
+<td>Foxtrot</td>
+<td>35</td>
+<td>32</td>
+<td>31</td>
+<td>29</td>
+<td>33</td>
+</tr>
+
+<tr>
+<td>Grame and Oti</td>
+<td>Tango</td>
+<td>27</td>
+<td>24</td>
+<td>23</td>
+<td>23</td>
+<td>29</td>
+</tr>
+
+<tr>
+<td>Joe and Dianne</td>
+<td>Waltz</td>
+<td>30</td>
+<td>28</td>
+<td>30</td>
+<td>27</td>
+<td>29</td>
+</tr>
+
+<tr>
+<td>Kate and Aljaz</td>
+<td>Viennese Waltz</td>
+<td>31</td>
+<td>26</td>
+<td>29</td>
+<td>28</td>
+<td>26</td>
+</tr>
+
+<tr>
+<td>Lauren and AJ</td>
+<td>Contemporary</td>
+<td>30</td>
+<td>23</td>
+<td>23</td>
+<td>24</td>
+<td>24</td>
+</tr>
+
+<tr>
+<td>Ranj and Janette</td>
+<td>American Smooth</td>
+<td>25</td>
+<td>26</td>
+<td>27</td>
+<td>26</td>
+<td>25</td>
+</tr>
+
+<tr>
+<td>Seann and Katya</td>
+<td>Quickstep</td>
+<td>28</td>
+<td>23</td>
+<td>22</td>
+<td>23</td>
+<td>24</td>
+</tr>
+
+<tr>
+<td>Stacey and Kevin</td>
+<td>Samba</td>
+<td>27</td>
+<td>26</td>
+<td>27</td>
+<td>25</td>
+<td>33</td>
+</tr>
+
+<tr>
+<td>Vick and Graziano</td>
+<td>Cha cha cha</td>
+<td>28</td>
+<td>23</td>
+<td>26</td>
+<td>25</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+
+<p>I made a few charts to visualize the scoring.</p>
+
+<p>First, a scatter plot to see how predictions compared to actual scoring:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> sns<span style="color:#f92672">.</span>plotting_context(<span style="color:#e6db74">&#39;talk&#39;</span>):
+    sns<span style="color:#f92672">.</span>pairplot(df,x_vars<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;fan&#39;</span>,<span style="color:#e6db74">&#39;xgbr&#39;</span>],y_vars<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#39;actual&#39;</span>],
+                 hue<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;partners&#39;</span>,height<span style="color:#f92672">=</span><span style="color:#ae81ff">4</span>)</code></pre></div>
+
+<figure>
+    
+        <img src="/strictly-come-data/images/week-5-scatter.png" />
+    
+    
+</figure>
+
+
+<p>Compared to last time, you can see both the expert prediction and the model had a very difficult time predicting scores with a high degree of accuracy. To look at this more quantitatively, I calculated the same measures as last time:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;number exactly correct:&#39;</span>)
+<span style="color:#66d9ef">for</span> predict <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;fan&#39;</span>,<span style="color:#e6db74">&#39;gbr&#39;</span>,<span style="color:#e6db74">&#39;xgbr&#39;</span>,<span style="color:#e6db74">&#39;rfr&#39;</span>]:
+    num_right <span style="color:#f92672">=</span> (df[predict]<span style="color:#f92672">==</span>df[<span style="color:#e6db74">&#39;actual&#39;</span>])<span style="color:#f92672">.</span>sum()
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} : {}&#39;</span><span style="color:#f92672">.</span>format(df[predict]<span style="color:#f92672">.</span>name, num_right))
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;------&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#34;root mean square error&#34;</span>)
+<span style="color:#66d9ef">for</span> predict <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;fan&#39;</span>,<span style="color:#e6db74">&#39;gbr&#39;</span>,<span style="color:#e6db74">&#39;xgbr&#39;</span>,<span style="color:#e6db74">&#39;rfr&#39;</span>]:
+    rmse <span style="color:#f92672">=</span> mean_squared_error(df[<span style="color:#e6db74">&#39;actual&#39;</span>], df[predict])<span style="color:#f92672">**</span><span style="color:#ae81ff">0.5</span>
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} : {:.1f}&#39;</span><span style="color:#f92672">.</span>format(df[predict]<span style="color:#f92672">.</span>name, rmse))
+    
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;------&#39;</span>)
+
+<span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;r-squared coefficient of correlation:&#39;</span>)
+<span style="color:#66d9ef">for</span> predict <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;fan&#39;</span>,<span style="color:#e6db74">&#39;gbr&#39;</span>,<span style="color:#e6db74">&#39;xgbr&#39;</span>,<span style="color:#e6db74">&#39;rfr&#39;</span>]:
+    r_2 <span style="color:#f92672">=</span> r2_score(y_true<span style="color:#f92672">=</span>df[<span style="color:#e6db74">&#39;actual&#39;</span>], y_pred<span style="color:#f92672">=</span>df[predict])
+    <span style="color:#66d9ef">print</span>(<span style="color:#e6db74">&#39;{} : {:.2f}&#39;</span><span style="color:#f92672">.</span>format(df[predict]<span style="color:#f92672">.</span>name, r_2))</code></pre></div>
+<p>resulting in:</p>
+
+<pre><code>number exactly correct:
+fan : 1
+gbr : 1
+xgbr : 0
+rfr : 1
+------
+root mean square error
+fan : 5.7
+gbr : 5.5
+xgbr : 5.6
+rfr : 6.6
+------
+r-squared coefficient of correlation:
+fan : -0.14
+gbr : -0.05
+xgbr : -0.09
+rfr : -0.48
+</code></pre>
+
+<p>On all counts, the predictions were <em>less</em> accurate than last time. In fact, the r-squared values were near-zero or somewhat negative, implying no correlation (or even an anti-correlation!) between the predicted and actual scores.</p>
+
+<p>Once again, the gradient boosting regressors performed better than the random forest regressor, though this time the plain gradient boosting was ever-so-slightly better than the XGBoost. The better performance of XGBoost last week may have been just random, since the cross-validation performance of the two weren&rsquo;t all that different. The prediction accuracy of those two models were competitive with the expert fan.</p>
+
+<p>I also plotted the residuals:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python">points <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#39;x&#39;</span>,<span style="color:#e6db74">&#39;.&#39;</span>,<span style="color:#e6db74">&#39;+&#39;</span>,<span style="color:#e6db74">&#39;_&#39;</span>]
+<span style="color:#66d9ef">with</span> sns<span style="color:#f92672">.</span>plotting_context(<span style="color:#e6db74">&#39;talk&#39;</span>):
+    <span style="color:#66d9ef">for</span> point, predict <span style="color:#f92672">in</span> zip(points, [<span style="color:#e6db74">&#39;fan&#39;</span>,<span style="color:#e6db74">&#39;gbr&#39;</span>,<span style="color:#e6db74">&#39;xgbr&#39;</span>,<span style="color:#e6db74">&#39;rfr&#39;</span>]):
+        resid <span style="color:#f92672">=</span> df[predict]<span style="color:#f92672">-</span>df[<span style="color:#e6db74">&#39;actual&#39;</span>]
+        plt<span style="color:#f92672">.</span>plot(df[<span style="color:#e6db74">&#39;actual&#39;</span>],resid, point, label<span style="color:#f92672">=</span>predict, alpha<span style="color:#f92672">=</span><span style="color:#ae81ff">0.9</span>)
+    plt<span style="color:#f92672">.</span>ylim(<span style="color:#f92672">-</span><span style="color:#ae81ff">14.5</span>,<span style="color:#ae81ff">14.5</span>)
+    plt<span style="color:#f92672">.</span>legend()
+    plt<span style="color:#f92672">.</span>xlabel(<span style="color:#e6db74">&#39;actual score&#39;</span>)
+    plt<span style="color:#f92672">.</span>ylabel(<span style="color:#e6db74">&#39;residual&#39;</span>)
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Week 5 score residuals&#39;</span>)</code></pre></div>
+
+<figure>
+    
+        <img src="/strictly-come-data/images/week-5-residuals.png" />
+    
+    
+</figure>
+
+
+<p>The residual plot shows us there was a definite trend in how the predictions were wrong. In all cases, the predictions overestimated the low scores and underestimated the high scores.</p>
+
+<p>It&rsquo;s not all that surprising this is the way in which the predictions are inaccurate. A score of 20 is low at this point in the competition; it&rsquo;s more plausible to guess the partnership with the 20 would have scored 5 or so points <em>higher</em> than even lower. Similarly, a guess that&rsquo;s off by 5 or 10 points of a score actually in the high 30s <em>must</em> have been an underestimate, since it&rsquo;s impossible to score higher than 40.</p>
+
+<p>The magnitude of the underestimates of the high scores tended to be larger, likely because there were some very high scores from somewhat unexpected dances: Charles and Karen&rsquo;s couple&rsquo;s choice street dance, and Danny and Amy&rsquo;s aviation-themed jive.</p>
+
+<p>A histogram (with kernel density estimates added—thanks, <code>seaborn</code>!) illustrates a consistent point. The distribution of actual scores was broader than any of the predictions:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#66d9ef">with</span> sns<span style="color:#f92672">.</span>plotting_context(<span style="color:#e6db74">&#39;talk&#39;</span>):
+    <span style="color:#66d9ef">for</span> predict <span style="color:#f92672">in</span> [<span style="color:#e6db74">&#39;fan&#39;</span>,<span style="color:#e6db74">&#39;gbr&#39;</span>,<span style="color:#e6db74">&#39;xgbr&#39;</span>,<span style="color:#e6db74">&#39;rfr&#39;</span>,<span style="color:#e6db74">&#39;actual&#39;</span>]:
+        sns<span style="color:#f92672">.</span>distplot(df[predict], label<span style="color:#f92672">=</span>predict)
+    plt<span style="color:#f92672">.</span>legend()
+    plt<span style="color:#f92672">.</span>title(<span style="color:#e6db74">&#39;Week 5 score distributions&#39;</span>)</code></pre></div>
+
+<figure>
+    
+        <img src="/strictly-come-data/images/week-5-distplot.png" />
+    
+    
+</figure>
+
+
+<p>So, overall a tough week to predict! I think it&rsquo;s clear why, though—many of the scores this week seemed surprising based on how celebrities had done in the past. It also didn&rsquo;t help the machine learning models they were thrown situations for which no data existed (Bruno substitute, new types of dances).</p>
+
+<p>I&rsquo;ll have to see whether next week, Halloween Week on Strictly, will go any better. It may be spooky, but hopefully there won&rsquo;t be too many scary surprises for the models!</p>
+
+
+<figure>
+    
+        <img src="/strictly-come-data/images/judges-halloween.gif" />
+    
+    
+    <figcaption>
+        <h4>Judges: ready.</h4>
+        
+    </figcaption>
+    
+</figure>
+
+
+<p>And remember, keeeeeeeeeeeep data-ing!</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-near-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://awbirdsall.github.io/strictly-come-data/" >
+    &copy; 2018 Strictly Come Data
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/strictly-come-data/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
