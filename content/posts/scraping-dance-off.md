@@ -8,7 +8,7 @@ Now that I have [two](../score-evaluation/) [weeks](../week-5-scores) of predict
 
 >  "after controlling for where the couple have come in the judges’ scoring, an ethnic minority celebrity is statistically significantly more likely to be in the bottom two and therefore to have received a lower public vote."
 
-They say their study found the effect corresponds to a 71% increase in the likelihood in being in the dance-off for non-white celebrities, and 83% for black women—strikingly large effects. It doesn't seem like a more detailed description of their analysis has been published, so I am interested in whether I could reproduce their results.
+They say their study found a 71% increase in the likelihood of being in the dance-off for non-white celebrities, and 83% for black women—strikingly large effects. It doesn't seem like a more detailed description of their analysis has been published, so I am interested in whether I could reproduce their results.
 
 It would also be interesting to look at other possible predictive variables: e.g., size of social media following, age, hometown, or type of celebrity.
 
