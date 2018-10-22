@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Strictly Come Data</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Oct 2018 19:30:36 -0400</lastBuildDate>
+    <lastBuildDate>Sun, 21 Oct 2018 18:48:40 -0400</lastBuildDate>
     
 	<atom:link href="http://awbirdsall.github.io/strictly-come-data/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Scraping Dance-Off Data from Wikipedia</title>
+      <link>http://awbirdsall.github.io/strictly-come-data/posts/scraping-dance-off/</link>
+      <pubDate>Sun, 21 Oct 2018 18:48:40 -0400</pubDate>
+      
+      <guid>http://awbirdsall.github.io/strictly-come-data/posts/scraping-dance-off/</guid>
+      <description>Now that I have two weeks of predicting Strictly scores under my belt, I&amp;rsquo;m interested in looking at who gets voted into the dance-off. For example, a 2016 article in The Guardian by Julia Carter and Richard McManus reported that
+ &amp;ldquo;after controlling for where the couple have come in the judges’ scoring, an ethnic minority celebrity is statistically significantly more likely to be in the bottom two and therefore to have received a lower public vote.</description>
+    </item>
     
     <item>
       <title>Week 5 Scores: A Tough Week to Predict</title>
